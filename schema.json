@@ -1,0 +1,513 @@
+{
+	"title": "Zpracování dopravních dat pro danou oblast",
+	"description": "Konfigurace pro získání a zpracování dopravních dat pro oblast definovanou polygonem",
+	"type": "object",
+	"properties": {
+		"data_folder": {
+			"description": "Cesta ke složce s daty",
+			"type": "string"
+		},
+		"logs": {
+			"description": "Parametry výpisů programu",
+			"type": "object",
+			"properties": {
+				"level": {
+					"description": "Stupen vypsaných zpráv",
+					"type": "string",
+					"enum": ["critical", "error", "warning", "info", "debug"]
+				},
+				"log_file": {
+					"description": "Soubor s výpisy",
+					"type": "string"
+				},
+				"file_mode": {
+					"description": "Mód otevření souboru",
+					"type": "string",
+					"enum": ["w", "a"]
+				}
+			},
+			"required": ["level", "log_file", "file_mode"]
+		},
+		"scrapers": {
+			"description": "Seznam cílů pro scraping",
+			"type": "array",
+			"items": {
+				"description": "Konfigurace pro cíl scrapingu",
+				"type": "object",
+				"properties": {
+					"target_url": {
+						"description": "Adresa, na které bude scraping probíhat",
+						"type": "string"
+					},
+					"parser": {
+						"description": "Použitý parser",
+						"type": "string"
+					},
+					"extract_folder": {
+						"description": "Cesta ke složce, do které budou data uložena",
+						"type": "string"
+					},
+					"scraper": {
+						"description": "Použitý scraper ze souboru scrapers.py",
+						"type": "string"
+					}
+				},
+				"required": ["target_url", "parser", "extract_folder", "scraper"]
+			}
+		},
+		"apis": {
+			"description": "Seznam cílových zdrojů API",
+			"type": "array",
+			"items": {
+				"description": "Konfigurace pro zpracování dat z API",
+				"type": "object",
+				"properties": {
+					"url": {
+						"description": "Adresa zdroje API",
+						"type": "string"
+					},
+					"api_extractor": {
+						"description": "Použitý extractor ze souboru api_extractors.py",
+						"type": "string"
+					},
+					"api_loader": {
+						"description": "Použitý loader ze souboru api_loaders.py",
+						"type": "string"
+					},
+					"result_record_count": {
+						"description": "Maximální počet záznamů v jednom požadavku",
+						"type": "integer"
+					},
+					"crs": {
+						"description": "Souřadnicový referenční systém",
+						"type": "integer"
+					},
+					"arcpy_config": {
+						"description": "Konfigurace pro zpracování knihovnou ArcPy",
+						"type": "object",
+						"properties": {
+							"id_column": {
+								"description": "Název sloupce s ID záznamů",
+								"type": "string"
+							},
+							"gdb_path": {
+								"description": "Cesta k souborové geodatabázi",
+								"type": "string"
+							},
+							"gdb_name": {
+								"description": "Název souboru geodatabáze",
+								"type": "string"
+							},
+							"version": {
+								"description": "Verze geodatabáze",
+								"type": "string"
+							},
+							"entry_name": {
+								"description": "Název relationship class",
+								"type": "string"
+							},
+							"entry_type": {
+								"description": "Typ uložení",
+								"type": "string",
+								"enum": ["featureclass", "table"]
+							},
+							"entry_relation": {
+								"description": "Nastavení relationship class",
+								"type": ["object", "null"],
+								"properties": {
+									"dataset_name": {
+										"description": "Název datasetu, do kterého se vztah uloží",
+										"type": "string"
+									},
+									"relation_orig": {
+										"description": "Počáteční tabulka relace",
+										"type": "string"
+									},
+									"relation_dest": {
+										"description": "Koncová tabulka relace",
+										"type": "string"
+									},
+									"relation_name": {
+										"description": "Název relace",
+										"type": "string"
+									},
+									"key_orig": {
+										"description": "Klíčový sloupec počáteční tabulky",
+										"type": "string"
+									},
+									"key_dest": {
+										"description": "Klíčový sloupec koncové tabulky",
+										"type": "string"
+									}
+								},
+								"required": [
+									"dataset_name",
+									"relation_orig",
+									"relation_dest",
+									"relation_name",
+									"key_orig",
+									"key_dest"
+								]
+							},
+							"dtypes": {
+								"description": "Slovník datových typů pro uložení atributů",
+								"type": "object",
+								"additionalProperties": {
+									"description": "Datový typ atributu",
+									"type": "string",
+									"enum": [
+										"BIGINTEGER",
+										"LONG",
+										"SHORT",
+										"DOUBLE",
+										"FLOAT",
+										"TEXT",
+										"DATE",
+										"DATEONLY",
+										"TIMEONLY",
+										"TIMESTAMPOFFSET",
+										"BLOB",
+										"GUID",
+										"RASTER"
+									]
+								}
+							},
+							"dataset_name": {
+								"description": "Feature dataset, ve kterém je uložena featureclass",
+								"type": "string"
+							}
+						},
+						"required": [
+							"id_column",
+							"gdb_path",
+							"gdb_name",
+							"version",
+							"entry_name",
+							"entry_type",
+							"dtypes",
+							"dataset_name"
+						]
+					},
+					"geopandas_config": {
+						"description": "Konfigurace pro zpracování knihovnou GeoPandas",
+						"type": "object",
+						"properties": {
+							"file_path": {
+								"description": "Mapování dat na výstupní soubory",
+								"type": "string"
+							}
+						},
+						"required": ["file_path"]
+					},
+					"drop_columns": {
+						"description": "Seznam atributů, které budou zahozeny",
+						"type": "array",
+						"items": {
+							"description": "Název pole",
+							"type": "string"
+						}
+					}
+				},
+				"required": [
+					"url",
+					"api_loader",
+					"api_extractor",
+					"drop_columns",
+					"result_record_count"
+				]
+			}
+		},
+		"polygon_filter": {
+			"type": "object",
+			"properties": {
+				"arcpy_gdb": {
+					"description": "Konfigurace pro práci s polygony za využití knihovny ArcPy",
+					"type": "object",
+					"properties": {
+						"file_path": {
+							"description": "Cesta k souborové geodatabázi s polygony",
+							"type": "string"
+						},
+						"polygon_id_col": {
+							"description": "Název sloupce, který obsahuje ID polygonů",
+							"type": "string"
+						},
+						"polygon_id": {
+							"description": "ID hledaného polygonu",
+							"type": "integer"
+						},
+						"feature_class": {
+							"description": "Název feature class, ve které se záznamy nacházejí",
+							"type": "string"
+						},
+						"polygon_cols": {
+							"description": "Seznam použitých sloupců ze záznamu",
+							"type": "array",
+							"items": { "type": "string" }
+						}
+					},
+					"required": [
+						"file_path",
+						"polygon_id_col",
+						"polygon_id",
+						"feature_class",
+						"polygon_cols"
+					]
+				},
+				"gpd_file": {
+					"description": "Konfigurace pro práci s polygony za využití knihovny GeoPandas",
+					"type": "object",
+					"properties": {
+						"file_path": {
+							"description": "Cesta k souboru s polygony",
+							"type": "string"
+						},
+						"polygon_id_col": {
+							"description": "Název sloupce, který obsahuje ID polygonů",
+							"type": "string"
+						},
+						"polygon_id": {
+							"description": "ID použitého polygonu",
+							"type": "integer"
+						}
+					},
+					"required": ["file_path", "polygon_id_col", "polygon_id"]
+				}
+			}
+		},
+		"loaders": {
+			"type": "object",
+			"properties": {
+				"ArcpyFileLoader": {
+					"description": "Loader využívající knihovnu ArcPy",
+					"type": "object",
+					"properties": {
+						"crs": {
+							"description": "Souřadnicový referenční systém",
+							"type": "integer"
+						},
+						"gdb_path": {
+							"description": "Cesta k souborové geodatabázi",
+							"type": "string"
+						},
+						"gdb_name": {
+							"description": "Název souboru geodatabáze",
+							"type": "string"
+						},
+						"version": {
+							"description": "Verze geodatabáze",
+							"type": "string"
+						},
+						"dtypes": {
+							"description": "Slovník datových typů pro uložení atributů",
+							"type": "object",
+							"additionalProperties": {
+								"description": "Datový typ atributu",
+								"type": "string",
+								"enum": [
+									"BIGINTEGER",
+									"LONG",
+									"SHORT",
+									"DOUBLE",
+									"FLOAT",
+									"TEXT",
+									"DATE",
+									"DATEONLY",
+									"TIMEONLY",
+									"TIMESTAMPOFFSET",
+									"BLOB",
+									"GUID",
+									"RASTER"
+								]
+							}
+						},
+						"aliases": {
+							"description": "Mapování sloupců na jejich aliasy",
+							"type": "object",
+							"additionalProperties": {
+								"description": "Alias sloupce",
+								"type": "string"
+							}
+						},
+						"additionalProperties": {
+							"description": "Mapování vstupních souborů na obsah geodatabáze",
+							"type": "object",
+							"properties": {
+								"entry_name": {
+									"description": "Název relationship class",
+									"type": "string"
+								},
+								"entry_type": {
+									"description": "Typ uložení",
+									"type": "string",
+									"enum": ["featureclass", "table"]
+								},
+								"entry_relation": {
+									"description": "Nastavení relationship class",
+									"type": ["object", "null"],
+									"properties": {
+										"relation_orig": {
+											"description": "Počáteční tabulka relace",
+											"type": "string"
+										},
+										"relation_dest": {
+											"description": "Koncová tabulka relace",
+											"type": "string"
+										},
+										"relation_name": {
+											"description": "Název relace",
+											"type": "string"
+										}
+									},
+									"required": [
+										"relation_orig",
+										"relation_dest",
+										"relation_name"
+									]
+								}
+							},
+							"dataset_name": {
+								"description": "Feature dataset, ve kterém je uložena featureclass",
+								"type": "string"
+							},
+							"required": [
+								"entry_name",
+								"entry_type",
+								"entry_relation",
+								"dataset_name"
+							]
+						}
+					},
+					"required": [
+						"crs",
+						"gdb_path",
+						"gdb_name",
+						"version",
+						"aliases",
+						"dtypes"
+					]
+				},
+				"GeoPandasFileLoader": {
+					"description": "Loader využívající knihovnu GeoPandas",
+					"type": "object",
+					"properties": {
+						"crs": {
+							"description": "Souřadnicový referenční systém",
+							"type": "integer"
+						}
+					},
+					"required": ["crs"],
+					"additionalProperties": {
+						"description": "Mapování vstupních souborů na soubory výstupní",
+						"type": "object",
+						"properties": {
+							"filename": {
+								"description": "Název souboru, do kterého budou data zapsána",
+								"type": "string"
+							}
+						},
+						"required": ["filename"]
+					}
+				}
+			}
+		},
+		"data_files": {
+			"description": "Záznamy souborů, které jsou předmětem zpracování",
+			"type": "object",
+			"additionalProperties": {
+				"description": "Konfigurace zpracování dat daného souboru",
+				"type": "object",
+				"extractor": {
+					"description": "Použitý extractor ze souboru extractors.py",
+					"type": "string"
+				},
+				"geofilter": {
+					"description": "Použitý geofilter ze souboru geofilters.py",
+					"type": ["string", "null"]
+				},
+				"loader": {
+					"description": "Použitý loader ze souboru loaders.py",
+					"type": "string"
+				},
+				"file_order": {
+					"description": "Pořadí zpracování souborů (soubory se souřadnicemi jsou zpracovány přednostně)",
+					"type": "integer"
+				},
+				"encoding": {
+					"description": "Kódování souborů CSV",
+					"type": "string"
+				},
+				"decimal": {
+					"description": "Podoba desetinné čárky v datech souboru",
+					"type": "string"
+				},
+				"delimiter": {
+					"description": "Oddělovač sloupců v CSV souborech",
+					"type": "string"
+				},
+				"coordinates": {
+					"description": "Mapování sloupců obsahujících souřadnice",
+					"type": "object",
+					"additionalProperties": { "enum": ["x", "y"] }
+				},
+				"id_column": {
+					"description": "Název sloupce s ID záznamů",
+					"type": "string"
+				},
+				"date_config": {
+					"type": ["object", "null"],
+					"properties": {
+						"columns": {
+							"description": "Seznam cloupců, které obsahují datum",
+							"type": "array",
+							"items": { "type": "string" }
+						},
+						"in_format": {
+							"description": "Vstupní formát datumu",
+							"type": "string"
+						},
+						"out_format": {
+							"description": "Formát uloženého datumu",
+							"type": "string"
+						}
+					},
+					"required": ["columns", "in_format", "out_format"]
+				},
+				"drop_columns": {
+					"description": "Seznam sloupců, které budou z dat odstraněny",
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"columns": {
+					"description": "Seznam jmen sloupců (pokud soubor neobsahuje hlavičku se jmény sloupců)",
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"rename_columns": {
+					"description": "Mapování existujících sloupců na nové názvy",
+					"type": "object",
+					"additionalProperties": { "type": "string" }
+				},
+				"required": [
+					"extractor",
+					"geofilter",
+					"loader",
+					"file_order",
+					"coordinates",
+					"id_column",
+					"date_config",
+					"drop_columns"
+				]
+			}
+		}
+	},
+	"required": [
+		"data_folder",
+		"logs",
+		"scrapers",
+		"apis",
+		"polygon_filter",
+		"loaders",
+		"data_files"
+	]
+}

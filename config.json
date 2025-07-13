@@ -1,0 +1,374 @@
+{
+	"data_folder": "data/",
+	"logs": {
+		"level": "info",
+		"log_file": "logs.txt",
+		"file_mode": "a"
+	},
+	"scrapers": [
+		{
+			"target_url": "https://www.policie.cz/clanek/statistika-nehodovosti-900835.aspx",
+			"parser": "html.parser",
+			"extract_folder": "data/",
+			"scraper": "ScraperPCR"
+		}
+	],
+	"apis": [],
+	"polygon_filter": {
+		"arcpy_gdb": {
+			"file_path": "hranice.gdb/",
+			"polygon_id_col": "Kod",
+			"polygon_id": 892,
+			"feature_class": "orp",
+			"polygon_cols": ["Kod", "SHAPE@"]
+		},
+		"gpd_file": {
+			"file_path": "polygon.geojson",
+			"polygon_id_col": "Kod",
+			"polygon_id": 1317
+		}
+	},
+	"loaders": {
+		"ArcpyFileLoader": {
+			"crs": 5514,
+			"gdb_path": ".",
+			"gdb_name": "DopravniNehody.gdb",
+			"version": "CURRENT",
+			"dtypes": { "p2a": "DATE" },
+			"aliases": {
+				"p1": "Identifikacni cislo",
+				"p2a": "Datum",
+				"p2b": "Cas",
+				"p4a": "Kraj",
+				"p4b": "Okres",
+				"p4c": "Utvar",
+				"p5a": "Lokalita nehody",
+				"p6": "Druh nehody",
+				"p7": "Druh srazky jedoucich vozidel",
+				"p8": "Druh pevne prekazky",
+				"p8a": "Druh zvirete",
+				"p9": "Charakter nehody",
+				"p10": "Zavineni nehody",
+				"p11": "Alkohol u vinika pritomen",
+				"p11a": "Drogy u vinika nehody",
+				"p12": "Hlavni priciny nehody",
+				"p13a": "Usmrceno osob",
+				"p13b": "Tezce zraneno osob",
+				"p13c": "Lehce zraneno osob",
+				"p14": "Celkova hmotna skoda",
+				"p15": "Druh porvchu vozovky",
+				"p16": "Stav povrchu vozovky",
+				"p17": "Stav komunikace",
+				"p18": "Povetrnostni podminky",
+				"p19": "Viditelnost",
+				"p20": "Rozhledove pomery",
+				"p21": "Deleni komunikace",
+				"p22": "Situovani nehody na komunikaci",
+				"p23": "Rizeni provozu v dobe nehody",
+				"p24": "Mistni uprava prednosti v jizde",
+				"p27": "Specificka mista a objekty",
+				"p28": "Smerove pomery",
+				"p34": "Pocet zucastnenych vozidel",
+				"p35": "Misto dopravni nehody",
+				"p36": "Druh pozemni komunikace",
+				"p37": "Cislo pozemni komunikace",
+				"p39": "Druh krizujici komunikace",
+				"p29": "Kategorie chodce",
+				"p29a": "Reflexni prvky u chodce",
+				"p29b": "Chodec na osobnim prepravniku",
+				"p30": "Stav chodce",
+				"p30a": "Alkohol u chodce",
+				"p30b": "Druh drogy u chodce",
+				"p31": "Chovani chodce",
+				"p32": "Situace v miste nehody",
+				"p33c": "Pohlavi osoby",
+				"p33d": "Vek chodce",
+				"p33e": "Statni prislusnost",
+				"p33f": "Poskytnuti prvni pomoci",
+				"p33g": "Nasledky",
+				"p59a": "Oznaceni osoby",
+				"p59b": "Blizsi oznaceni osoby",
+				"p59c": "Pohlavi osoby",
+				"p59d": "Vek osoby",
+				"p59e": "Statni prislusnost",
+				"p59f": "Poskytnuti prvni pomoci",
+				"p59g": "Nasledky",
+				"p44": "Druh vozidla",
+				"p45a": "Vyrobni znacka vozidla",
+				"p45b": "Udaje o vozidle",
+				"p45d": "Druh pohonu",
+				"p45f": "Druh pneumatik",
+				"p47": "Rok vyroby",
+				"p48a": "Charakteristika vozidla",
+				"p49": "Smyk",
+				"p50a": "Vozidlo po nehode",
+				"p50b": "Unik hmot",
+				"p51": "Zpusob vyprosteni",
+				"p52": "Smer jizdy",
+				"p53": "Skoda na vozidle",
+				"p55a": "Kategorie ridice",
+				"p57": "Stav ridice",
+				"p58": "Vnejsi ovlivneni ridice"
+			},
+			"04": {
+				"entry_type": "featureclass",
+				"entry_name": "DopravniNehody_Nehody",
+				"dataset_name": "DopravniNehody_Nehody"
+			},
+			"CHODCI": {
+				"entry_type": "table",
+				"entry_name": "DopravniNehody_Chodci",
+				"entry_relation": {
+					"dataset_name": "DopravniNehody_Nehody",
+					"relation_orig": "DopravniNehody_Nehody",
+					"relation_dest": "DopravniNehody_Chodci",
+					"relation_name": "DopravniNehody_Nehody_Chodci"
+				},
+				"dataset_name": ""
+			},
+			"IntGPS": {
+				"entry_type": "featureclass",
+				"entry_name": "DopravniNehody_Nehody",
+				"dataset_name": "DopravniNehody_Nehody"
+			},
+			"Inehody": {
+				"entry_type": "featureclass",
+				"entry_name": "DopravniNehody_Nehody",
+				"dataset_name": "DopravniNehody_Nehody"
+			},
+			"Ichodci": {
+				"entry_type": "table",
+				"entry_name": "DopravniNehody_Chodci",
+				"entry_relation": {
+					"dataset_name": "DopravniNehody_Nehody",
+					"relation_orig": "DopravniNehody_Nehody",
+					"relation_dest": "DopravniNehody_Chodci",
+					"relation_name": "DopravniNehody_Nehody_Chodci"
+				},
+				"dataset_name": ""
+			},
+			"Inasledky": {
+				"entry_type": "table",
+				"entry_name": "DopravniNehody_Nasledky",
+				"entry_relation": {
+					"dataset_name": "DopravniNehody_Nehody",
+					"relation_orig": "DopravniNehody_Nehody",
+					"relation_dest": "DopravniNehody_Nasledky",
+					"relation_name": "DopravniNehody_Nehody_Nasledky"
+				},
+				"dataset_name": ""
+			},
+			"IVozidla": {
+				"entry_type": "table",
+				"entry_name": "DopravniNehody_Vozidla",
+				"entry_relation": {
+					"dataset_name": "DopravniNehody_Nehody",
+					"relation_orig": "DopravniNehody_Nehody",
+					"relation_dest": "DopravniNehody_Vozidla",
+					"relation_name": "DopravniNehody_Nehody_Vozidla"
+				},
+				"dataset_name": ""
+			}
+		},
+		"GeoPandasFileLoader": {
+			"crs": 5514,
+			"04": {
+				"filename": "nehody.geojson"
+			},
+			"CHODCI": {
+				"filename": "chodci.geojson"
+			},
+			"IntGPS": {
+				"filename": "nehody.geojson"
+			},
+			"Inehody": {
+				"filename": "nehody.geojson"
+			},
+			"Ichodci": {
+				"filename": "chodci.geojson"
+			},
+			"Inasledky": {
+				"filename": "nasledky.geojson"
+			},
+			"IVozidla": {
+				"filename": "vozidla.geojson"
+			}
+		}
+	},
+	"data_files": {
+		"04": {
+			"extractor": "CSVExtractor",
+			"geofilter": "ArcpyGeofilter",
+			"loader": "ArcpyFileLoader",
+			"file_order": 0,
+			"encoding": "windows-1250",
+			"decimal": ",",
+			"delimiter": ";",
+			"coordinates": { "d": "x", "e": "y" },
+			"id_column": "p1",
+			"date_config": {
+				"columns": ["p2a"],
+				"in_format": "%d.%m.%Y",
+				"out_format": "%d/%m/%Y"
+			},
+			"drop_columns": [
+				"a",
+				"b",
+				"f",
+				"g",
+				"h",
+				"i",
+				"j",
+				"k",
+				"l",
+				"n",
+				"o",
+				"p",
+				"q",
+				"r",
+				"s",
+				"t",
+				"weekday"
+			],
+			"columns": [
+				"p1",
+				"p36",
+				"p37",
+				"p2a",
+				"weekday",
+				"p2b",
+				"p6",
+				"p7",
+				"p8",
+				"p9",
+				"p10",
+				"p11",
+				"p12",
+				"p13a",
+				"p13b",
+				"p13c",
+				"p14",
+				"p15",
+				"p16",
+				"p17",
+				"p18",
+				"p19",
+				"p20",
+				"p21",
+				"p22",
+				"p23",
+				"p24",
+				"p27",
+				"p28",
+				"p34",
+				"p35",
+				"p39",
+				"p44",
+				"p45a",
+				"p47",
+				"p48a",
+				"p49",
+				"p50a",
+				"p50b",
+				"p51",
+				"p52",
+				"p53",
+				"p55a",
+				"p57",
+				"p58",
+				"a",
+				"b",
+				"d",
+				"e",
+				"f",
+				"g",
+				"h",
+				"i",
+				"j",
+				"k",
+				"l",
+				"n",
+				"o",
+				"p",
+				"q",
+				"r",
+				"s",
+				"t",
+				"p5a"
+			]
+		},
+		"CHODCI": {
+			"extractor": "CSVExtractor",
+			"geofilter": null,
+			"loader": "ArcpyFileLoader",
+			"file_order": 1,
+			"encoding": "windows-1250",
+			"decimal": ",",
+			"delimiter": ";",
+			"coordinates": null,
+			"id_column": "p1",
+			"date_config": null,
+			"drop_columns": [],
+			"columns": ["p1", "p29", "p30", "p31", "p32"]
+		},
+		"IntGPS": {
+			"extractor": "XLSExtractor",
+			"geofilter": "ArcpyGeofilter",
+			"loader": "ArcpyFileLoader",
+			"file_order": 0,
+			"coordinates": { "e": "x", "d": "y" },
+			"id_column": "p1",
+			"date_config": null,
+			"drop_columns": ["h", "i", "j", "k"],
+			"rename_columns": {}
+		},
+		"Inehody": {
+			"extractor": "XLSExtractor",
+			"geofilter": null,
+			"loader": "ArcpyFileLoader",
+			"file_order": 1,
+			"coordinates": null,
+			"id_column": "p1",
+			"date_config": {
+				"columns": ["p2a"],
+				"in_format": "%d.%m.%Y",
+				"out_format": "%d/%m/%Y"
+			},
+			"drop_columns": ["p4a", "p4b", "p4c", "p38"],
+			"rename_columns": { "p14*100": "p14" }
+		},
+		"Ichodci": {
+			"extractor": "XLSExtractor",
+			"geofilter": null,
+			"loader": "ArcpyFileLoader",
+			"file_order": 2,
+			"coordinates": null,
+			"id_column": "p1",
+			"date_config": null,
+			"drop_columns": [],
+			"rename_columns": {}
+		},
+		"Inasledky": {
+			"extractor": "XLSExtractor",
+			"geofilter": null,
+			"loader": "ArcpyFileLoader",
+			"file_order": 3,
+			"coordinates": null,
+			"id_column": "p1",
+			"date_config": null,
+			"drop_columns": ["id_vozidla"],
+			"rename_columns": {}
+		},
+		"IVozidla": {
+			"extractor": "XLSExtractor",
+			"geofilter": null,
+			"loader": "ArcpyFileLoader",
+			"file_order": 4,
+			"coordinates": null,
+			"id_column": "p1",
+			"date_config": null,
+			"drop_columns": ["id_vozidla", "p55b", "p56"],
+			"rename_columns": {}
+		}
+	}
+}

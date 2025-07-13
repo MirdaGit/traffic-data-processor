@@ -1,0 +1,7 @@
+beautifulsoup4==4.12.3
+geopandas==1.0.1
+jsonschema==4.23.0
+pandas==2.2.3
+patool==3.0.0
+Requests==2.32.3
+lxml==5.3.0
