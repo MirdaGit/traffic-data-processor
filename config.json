@@ -16,16 +16,16 @@
 	"apis": [],
 	"polygon_filter": {
 		"arcpy_gdb": {
-			"file_path": "hranice.gdb/",
+			"file_path": "examples/polygony_orp.gdb/",
 			"polygon_id_col": "Kod",
 			"polygon_id": 1317,
 			"feature_class": "orp",
 			"polygon_cols": ["Kod", "SHAPE@"]
 		},
 		"gpd_file": {
-			"file_path": "polygon.geojson",
-			"polygon_id_col": "Kod",
-			"polygon_id": 1317
+			"file_path": "examples/polygony_brno.geojson",
+			"polygon_id_col": "kod",
+			"polygon_id": 550973
 		}
 	},
 	"loaders": {
