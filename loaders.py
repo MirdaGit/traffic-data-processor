@@ -191,7 +191,7 @@ class ArcpyFileLoader(BaseLoader):
         """
 
         if dtype == np.int64:
-            return "DOUBLE"
+            return "INTEGER"
         elif dtype == np.int32:
             return "LONG"
         elif dtype == np.int16:
@@ -417,13 +417,13 @@ class ArcpyFileLoader(BaseLoader):
 
             # Update existing columns
             if len(shared_columns) > 1:
+                # Cast to correct datatypes
+                current_cols_df = current_cols_df.astype(update_data[shared_columns].dtypes)
+
                 current_cols_df = current_cols_df.set_index(
                     self.file_config["id_column"])
                 update_data = update_data.set_index(
                     self.file_config["id_column"])
-                print(update_data.dtypes)
-                print(current_cols_df.dtypes)
-                exit()
                 update_data.update(current_cols_df)
                 update_data = update_data.reset_index()
 
