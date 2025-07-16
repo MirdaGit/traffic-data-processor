@@ -18,7 +18,7 @@
 		"arcpy_gdb": {
 			"file_path": "hranice.gdb/",
 			"polygon_id_col": "Kod",
-			"polygon_id": 892,
+			"polygon_id": 1317,
 			"feature_class": "orp",
 			"polygon_cols": ["Kod", "SHAPE@"]
 		},
@@ -110,7 +110,7 @@
 				"p57": "Stav ridice",
 				"p58": "Vnejsi ovlivneni ridice"
 			},
-			"04": {
+			"06": {
 				"entry_type": "featureclass",
 				"entry_name": "DopravniNehody_Nehody",
 				"dataset_name": "DopravniNehody_Nehody"
@@ -172,7 +172,7 @@
 		},
 		"GeoPandasFileLoader": {
 			"crs": 5514,
-			"04": {
+			"06": {
 				"filename": "nehody.geojson"
 			},
 			"CHODCI": {
@@ -196,7 +196,7 @@
 		}
 	},
 	"data_files": {
-		"04": {
+		"06": {
 			"extractor": "CSVExtractor",
 			"geofilter": "ArcpyGeofilter",
 			"loader": "ArcpyFileLoader",
