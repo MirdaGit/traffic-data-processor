@@ -110,7 +110,7 @@ Mimo nástroje je navíc **nutné** dodat polygon, pomocí kterého bude provád
 python process_data.py
 ```
 
-V základní podobě jsou po spuštění automaticky staženy archivy dopravních nehod ze stránek Policie ČR a jsou rozbaleny do složky `data`. V rámci zpracování jsou tyto soubory postupně nahrazeny soubory typu Pickle. Tímto je při opakovaném spuštění zajištěno vyrazně rychlejší načítání dat a současně dochází i ke snížení nároků na úložiště. Průběh programu je zaznamenáván do souboru `logs.txt`. Rozsah výpisů se odvíjí od nastavené úrovně logování.
+V základní podobě jsou po spuštění automaticky staženy archivy dopravních nehod ze stránek Policie ČR a následně jsou rozbaleny do složky `data`. V rámci zpracování jsou tyto soubory postupně nahrazeny soubory typu Pickle. Tímto je při opakovaném spuštění zajištěno vyrazně rychlejší načítání dat a současně dochází i ke snížení nároků na úložiště. Průběh programu je zaznamenáván do souboru `logs.txt`. Rozsah výpisů se odvíjí od nastavené úrovně logování v konfiguračním souboru.
 
 ### Přehled hlavních prvků konfigurace
 
